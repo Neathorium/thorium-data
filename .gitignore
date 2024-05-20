@@ -163,3 +163,10 @@ target/*
 target/**
 ./target
 ./target/*
+
+./build
+./build/
+build/
+build
+./build/*
+build/*

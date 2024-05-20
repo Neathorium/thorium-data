@@ -10,19 +10,21 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>17</java.version>
+        <java.version>21</java.version>
         <!--Dependency Versions-->
-        <thorium-exceptions.version>e695205e5fe63212fac4803bcbf4734c7105cb72</thorium-exceptions.version>
-        <thorium-java-extensions.version>371717b511c6675b666e9f3e2f78a135c299d294</thorium-java-extensions.version>
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-        <maven-failsafe-plugin.version>3.0.0-M5</maven-failsafe-plugin.version>
-        <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
-        <commons.io.version>2.11.0</commons.io.version>
-        <jackson.version>2.13.3</jackson.version>
-        <junit.jupiter.version>5.8.2</junit.jupiter.version>
-        <aspectj.version>1.9.4</aspectj.version>
-        <allure.version>2.17.3</allure.version>
-        <allure-maven.version>2.10.0</allure-maven.version>
+        <thorium-exceptions.version>dbd9653ff73f301422ad06c9f0908b1d13241afb</thorium-exceptions.version>
+        <thorium-java-extensions.version>32df3f96b7489359c7ce47ce1174e8085d702631</thorium-java-extensions.version>
+        <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
+        <maven-failsafe-plugin.version>3.2.5</maven-failsafe-plugin.version>
+        <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
+        <apache-commons-lang.version>3.14.0</apache-commons-lang.version>
+        <commons.io.version>2.16.1</commons.io.version>
+        <jackson.version>2.17.0</jackson.version>
+        <junit.jupiter.version>5.10.2</junit.jupiter.version>
+        <aspectj.version>1.9.21</aspectj.version>
+        <allure.version>2.27.0</allure.version>
+        <allure.junit5.version>2.27.0</allure.junit5.version>
+        <allure-maven.version>2.12.0</allure-maven.version>
         <allure.cmd.download.url>https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline</allure.cmd.download.url>
     </properties>
     <repositories>
@@ -47,7 +49,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.12.0</version>
+            <version>${apache-commons-lang.version}</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
@@ -70,7 +72,7 @@
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-junit5</artifactId>
-            <version>${allure.version}</version>
+            <version>${allure.junit5.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
