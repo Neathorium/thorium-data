@@ -6,11 +6,10 @@ import com.neathorium.thorium.java.extensions.namespaces.predicates.BasicPredica
 import com.neathorium.thorium.java.extensions.namespaces.predicates.GuardPredicates;
 import com.neathorium.thorium.java.extensions.namespaces.predicates.NullablePredicates;
 import com.neathorium.thorium.java.extensions.namespaces.utilities.BooleanUtilities;
+import com.neathorium.thorium.java.extensions.namespaces.utilities.StringUtilities;
 
 import java.util.function.Function;
 import java.util.function.Predicate;
-
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public interface DataPredicates {
     static boolean isInitialized(Data<?> data) {
@@ -21,7 +20,7 @@ public interface DataPredicates {
         return (
             isInitialized(data) &&
             NullablePredicates.isNotNull(data.EXCEPTION()) &&
-            isNotBlank(data.EXCEPTION_MESSAGE()) &&
+            StringUtilities.isVisible(data.EXCEPTION_MESSAGE()) &&
             MethodMessageDataPredicates.isValid(data.MESSAGE())
         );
     }
@@ -67,7 +66,7 @@ public interface DataPredicates {
     }
 
     static <T> boolean isValidNonFalseAndValidContained(Data<T> data, Function<T, String> validator) {
-        return isValidNonFalse(data) && isNotBlank(validator.apply(data.OBJECT()));
+        return isValidNonFalse(data) && StringUtilities.isVisible(validator.apply(data.OBJECT()));
     }
 
     static <T> Predicate<Data<T>> isValidNonFalseAndValidContains(Function<T, String> validator) {

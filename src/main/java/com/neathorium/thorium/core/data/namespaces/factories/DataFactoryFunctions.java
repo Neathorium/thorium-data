@@ -6,14 +6,12 @@ import com.neathorium.thorium.core.data.records.Data;
 import com.neathorium.thorium.exceptions.constants.ExceptionConstants;
 import com.neathorium.thorium.java.extensions.namespaces.predicates.NullablePredicates;
 import com.neathorium.thorium.java.extensions.namespaces.utilities.BooleanUtilities;
-
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import com.neathorium.thorium.java.extensions.namespaces.utilities.StringUtilities;
 
 public interface DataFactoryFunctions {
     static <T> Data<T> getWith(T object, boolean status, MethodMessageData messageData, Exception exception, String exceptionMessage) {
         final var errorMessage = NullablePredicates.isNull(messageData) ? "Method Message Data was null.\n" : "";
-        if (isNotBlank(errorMessage)) {
+        if (StringUtilities.isVisible(errorMessage)) {
             throw new IllegalArgumentException(errorMessage);
         }
 
@@ -26,7 +24,7 @@ public interface DataFactoryFunctions {
         }
 
         var localExceptionMessage = exceptionMessage;
-        if (isBlank(localExceptionMessage)) {
+        if (StringUtilities.isInvisible(localExceptionMessage)) {
             localExceptionMessage = isExceptionNull ? exceptionNullMessage : exception.getMessage();
         }
 
@@ -182,15 +180,15 @@ public interface DataFactoryFunctions {
     }
 
     static Data<String> getString(String object, String message) {
-        return DataFactoryFunctions.getWith(object, isNotBlank(object), message);
+        return DataFactoryFunctions.getWith(object, StringUtilities.isVisible(object), message);
     }
 
     static Data<String> getString(String object, String nameof, String message) {
-        return DataFactoryFunctions.getWith(object, isNotBlank(object), nameof, message);
+        return DataFactoryFunctions.getWith(object, StringUtilities.isVisible(object), nameof, message);
     }
 
     static Data<String> getString(String object, String message, Exception exception, String exceptionMessage) {
-        return DataFactoryFunctions.getWith(object, isNotBlank(object), message, exception, exceptionMessage);
+        return DataFactoryFunctions.getWith(object, StringUtilities.isVisible(object), message, exception, exceptionMessage);
     }
 
     static Data<Object[]> getArrayWithName(Object[] object, boolean status, String nameof) {

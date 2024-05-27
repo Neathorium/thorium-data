@@ -8,12 +8,9 @@ import com.neathorium.thorium.exceptions.exception.ArgumentNullException;
 import com.neathorium.thorium.exceptions.namespaces.ExceptionFunctions;
 import com.neathorium.thorium.java.extensions.namespaces.predicates.NullablePredicates;
 import com.neathorium.thorium.java.extensions.namespaces.utilities.StringUtilities;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.function.BiFunction;
 import java.util.function.Predicate;
-
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public interface DataFunctions {
     static <T> T getObject(Data<T> data) {
@@ -30,13 +27,13 @@ public interface DataFunctions {
 
     static <T> String getNameof(Data<T> data) {
         final var methodMessageData = DataFunctions.getMethodMessageData(data);
-        final var status = NullablePredicates.isNotNull(methodMessageData) && StringUtils.isNotBlank(methodMessageData.NAMEOF());
+        final var status = NullablePredicates.isNotNull(methodMessageData) && StringUtilities.isVisible(methodMessageData.NAMEOF());
         return status ? methodMessageData.NAMEOF() : "";
     }
 
     static <T> String getMessage(Data<T> data) {
         final var methodMessageData = DataFunctions.getMethodMessageData(data);
-        final var status = NullablePredicates.isNotNull(methodMessageData) && StringUtils.isNotBlank(methodMessageData.MESSAGE());
+        final var status = NullablePredicates.isNotNull(methodMessageData) && StringUtilities.isVisible(methodMessageData.MESSAGE());
         return status ? methodMessageData.MESSAGE() : "";
     }
 
@@ -76,7 +73,7 @@ public interface DataFunctions {
     }
 
     static String getNameIfAbsent(Data<?> data, String nameof) {
-        final var localNameof = StringUtils.isNotBlank(nameof) ? nameof: "DataFunctions.getNameIfAbsent";
+        final var localNameof = StringUtilities.isVisible(nameof) ? nameof: "DataFunctions.getNameIfAbsent";
         var name = "";
         if (NullablePredicates.isNotNull(data)) {
             name = data.MESSAGE().NAMEOF();
@@ -109,7 +106,7 @@ public interface DataFunctions {
     }
 
     private static void throwIfNullCore(String nameof, Data<?> data) {
-        final var localNameof = StringUtils.isNotBlank(nameof) ? nameof : "DataFunctions.throwIfNullCore";
+        final var localNameof = StringUtilities.isVisible(nameof) ? nameof : "DataFunctions.throwIfNullCore";
         if (NullablePredicates.isNotNull(data)) {
             return;
         }
@@ -118,7 +115,7 @@ public interface DataFunctions {
     }
 
     private static void throwIfExceptionCore(String nameof, Data<?> data) {
-        final var localNameof = StringUtils.isNotBlank(nameof) ? nameof : "DataFunctions.throwIfExceptionCore";
+        final var localNameof = StringUtilities.isVisible(nameof) ? nameof : "DataFunctions.throwIfExceptionCore";
         final var exception = data.EXCEPTION();
         if (ExceptionFunctions.isNonException(exception)) {
             return;
