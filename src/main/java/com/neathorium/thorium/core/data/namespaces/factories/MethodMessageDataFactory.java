@@ -4,11 +4,10 @@ import com.neathorium.thorium.core.data.namespaces.formatters.MethodMessageDataF
 import com.neathorium.thorium.core.data.records.MethodMessageData;
 import com.neathorium.thorium.java.extensions.interfaces.functional.TriFunction;
 import com.neathorium.thorium.java.extensions.namespaces.predicates.NullablePredicates;
+import com.neathorium.thorium.java.extensions.namespaces.utilities.StringUtilities;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
-
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public interface MethodMessageDataFactory {
     private static MethodMessageData getWithCore(
@@ -23,12 +22,12 @@ public interface MethodMessageDataFactory {
             (NullablePredicates.isNull(constructor) ? "Constructor is null.\n" : "") +
             (NullablePredicates.isNull(formatter) ? "Formatter function is null.\n" : "")
         );
-        if (isNotBlank(errorMessage)) {
+        if (StringUtilities.isVisible(errorMessage)) {
             throw exceptionFormatter.apply(methodNameof + ":\n" + errorMessage);
         }
 
-        final var localNameof = isNotBlank(nameof) ? nameof : methodNameof;
-        final var localMessage = isNotBlank(message) ? message : "Default method message";
+        final var localNameof = StringUtilities.isVisible(nameof) ? nameof : methodNameof;
+        final var localMessage = StringUtilities.isVisible(message) ? message : "Default method message";
         return constructor.apply(formatter, localNameof, localMessage);
     }
 

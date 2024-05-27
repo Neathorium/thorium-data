@@ -1,19 +1,20 @@
 package com.neathorium.thorium.core.data.namespaces.formatters;
 
+import com.neathorium.thorium.java.extensions.namespaces.utilities.StringUtilities;
 import org.apache.commons.lang3.StringUtils;
 
 public interface MethodMessageDataFormatters {
     static String getMethodMessageDataFormatted(String nameof, String message) {
         var errorMessage = "";
-        if (StringUtils.isBlank(nameof)) {
+        if (StringUtilities.isInvisible(nameof)) {
             errorMessage += "Nameof parameter was blank.\n";
         }
 
-        if (StringUtils.isBlank(message)) {
+        if (StringUtilities.isInvisible(message)) {
             errorMessage += "Message parameter was blank.\n";
         }
 
-        if (StringUtils.isNotBlank(errorMessage)) {
+        if (StringUtilities.isVisible(errorMessage)) {
             return "";
         }
 
